@@ -1,40 +1,108 @@
-# Currency Converter
+# 🌍 Country Explorer
 
-A simple currency converter web application made using HTML, CSS and JavaScript.
+Country Explorer is a simple web application that allows users to search for a country and view useful information about it.
 
-The application uses an online exchange rate API to get the latest available
-exchange rates and convert an amount from one currency to another.
+The application gets real-time country data using the REST Countries API.
 
-## Features
+## 📌 About the Project
 
-- Convert between different currencies
-- Uses exchange rates from an API
-- Swap currencies with one click
-- Shows the current conversion rate
+I created this project to practice working with APIs and JavaScript.
+
+A user can enter the name of a country in the search box. The application sends a request to the REST Countries API and displays the country's information on the page.
+
+## ✨ Features
+
+- Search country by name
+- Country flag
+- Official country name
+- Capital city
+- Population
+- Region
+- Subregion
+- Currency
+- Languages
+- Google Maps link
+- Error message for invalid country
+- Loading animation
 - Responsive design
-- Works on desktop and mobile screens
-- Basic error handling
 
-## Technologies Used
+## 🛠️ Technologies Used
 
-- HTML
-- CSS
+- HTML5
+- CSS3
 - JavaScript
-- Exchange Rate API
+- REST Countries API
+- Font Awesome
 
-## How It Works
+## 🌐 API Used
 
-The user enters an amount and selects the currencies they want to convert.
+This project uses the REST Countries API:
 
-JavaScript sends a request to the exchange rate API using the `fetch()` method.
-The API returns the exchange rate in JSON format. The required rate is then
-used to calculate the converted amount.
+https://restcountries.com/
 
-## Project Structure
+Example endpoint:
 
-currency-converter/
+```text
+https://restcountries.com/v3.1/name/India?fullText=true
+```
+
+## 📂 Project Structure
+
+```text
+country-info-finder/
 │
 ├── index.html
 ├── style.css
 ├── script.js
 └── README.md
+```
+
+## 🚀 How to Run the Project
+
+1. Download or clone this repository.
+2. Open the project folder.
+3. Open `index.html` in a web browser.
+4. Enter a country name in the search box.
+5. Click the Search button.
+
+An internet connection is required because country information is fetched from an external API.
+
+## 💡 How It Works
+
+1. User enters a country name.
+2. JavaScript reads the input.
+3. `fetch()` sends a request to the REST Countries API.
+4. The API returns country information in JSON format.
+5. JavaScript extracts the required information.
+6. The information is displayed dynamically on the webpage.
+
+## 📱 Responsive Design
+
+The website is designed to work on both desktop and mobile screen sizes.
+
+## 📸 Screenshot
+
+Add a screenshot of the project here after running it.
+
+```text
+screenshots/home.png
+```
+
+## 🔮 Future Improvements
+
+Some features that can be added in the future:
+
+- Dark mode
+- Search suggestions
+- Border country information
+- Weather information
+- Country comparison
+- Search history
+
+## 👨‍💻 Author
+
+Rishab Dubey
+
+## 📄 License
+
+This project is created for educational purposes.
