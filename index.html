@@ -4,76 +4,288 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Currency Converter</title>
+    <title>Country Explorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <header class="navbar">
+        <div class="nav-container">
 
-    <div class="converter">
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-earth-asia"></i>
+                </div>
 
-        <h1>Currency Converter</h1>
-        <p class="subtitle">Convert currencies using live exchange rates</p>
+                <span>Country Explorer</span>
+            </a>
 
-        <div class="form-group">
-            <label for="amount">Amount</label>
-            <input type="number" id="amount" placeholder="Enter amount">
-        </div>
-
-        <div class="currency-row">
-
-            <div class="form-group">
-                <label for="fromCurrency">From</label>
-
-                <select id="fromCurrency">
-                    <option value="USD">USD - US Dollar</option>
-                    <option value="INR">INR - Indian Rupee</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="GBP">GBP - British Pound</option>
-                    <option value="JPY">JPY - Japanese Yen</option>
-                    <option value="AUD">AUD - Australian Dollar</option>
-                    <option value="CAD">CAD - Canadian Dollar</option>
-                </select>
-            </div>
-
-            <button id="swapBtn" class="swap-btn" title="Swap currencies">
-                ⇄
-            </button>
-
-            <div class="form-group">
-                <label for="toCurrency">To</label>
-
-                <select id="toCurrency">
-                    <option value="INR">INR - Indian Rupee</option>
-                    <option value="USD">USD - US Dollar</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="GBP">GBP - British Pound</option>
-                    <option value="JPY">JPY - Japanese Yen</option>
-                    <option value="AUD">AUD - Australian Dollar</option>
-                    <option value="CAD">CAD - Canadian Dollar</option>
-                </select>
+            <div class="api-status">
+                <span class="status-dot"></span>
+                Live Country Data
             </div>
 
         </div>
+    </header>
 
-        <button id="convertBtn" class="convert-btn">
-            Convert
-        </button>
 
-        <div id="result" class="result">
-            Enter an amount and click Convert
-        </div>
+    <main>
 
-        <p id="rate" class="rate"></p>
+        <section class="hero">
 
-        <p id="error" class="error"></p>
+            <p class="small-heading">
+                EXPLORE THE WORLD
+            </p>
 
-        <div class="footer-text">
-            Exchange rates are fetched from an online API.
-        </div>
+            <h1>
+                Discover any country
+                <span>in seconds.</span>
+            </h1>
 
-    </div>
+            <p class="hero-text">
+                Search for a country and explore information about its
+                capital, population, currency, languages and more.
+            </p>
+
+            <div class="search-card">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+                    <input
+                        type="text"
+                        id="countryInput"
+                        placeholder="Search for a country..."
+                        autocomplete="off"
+                    >
+
+                    <button id="searchBtn">
+                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </div>
+
+                <div class="suggestions">
+                    <span>Popular:</span>
+
+                    <button class="quick-search" data-country="India">
+                        India
+                    </button>
+
+                    <button class="quick-search" data-country="Japan">
+                        Japan
+                    </button>
+
+                    <button class="quick-search" data-country="France">
+                        France
+                    </button>
+
+                    <button class="quick-search" data-country="Brazil">
+                        Brazil
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="status-area">
+
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p>Finding country information...</p>
+            </div>
+
+            <div class="error-box" id="errorBox">
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <div>
+                    <h3>Country not found</h3>
+                    <p id="errorMessage">
+                        Please check the country name and try again.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="country-card" id="countryCard">
+
+            <div class="country-header">
+
+                <div class="flag-wrapper">
+                    <img id="flag" src="" alt="Country flag">
+                </div>
+
+                <div class="country-title">
+
+                    <div class="country-name-row">
+                        <h2 id="countryName"></h2>
+                        <span id="countryCode"></span>
+                    </div>
+
+                    <p id="officialName"></p>
+
+                    <div class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="locationText"></span>
+                    </div>
+
+                </div>
+
+                <a href="#"
+                   id="mapLink"
+                   class="map-link"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    View Map
+                </a>
+
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+
+                    <div class="info-icon blue">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Capital</span>
+                        <p id="capital"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon purple">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Population</span>
+                        <p id="population"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon green">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Currency</span>
+                        <p id="currency"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon orange">
+                        <i class="fa-solid fa-language"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Languages</span>
+                        <p id="languages"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon pink">
+                        <i class="fa-solid fa-map"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Area</span>
+                        <p id="area"></p>
+                    </div>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <div class="info-icon cyan">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Timezone</span>
+                        <p id="timezone"></p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="extra-info">
+
+                <div>
+                    <span>Continent</span>
+                    <strong id="continent"></strong>
+                </div>
+
+                <div>
+                    <span>Subregion</span>
+                    <strong id="subregion"></strong>
+                </div>
+
+                <div>
+                    <span>Calling Code</span>
+                    <strong id="callingCode"></strong>
+                </div>
+
+                <div>
+                    <span>Top Level Domain</span>
+                    <strong id="domain"></strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Country Explorer • Data provided by
+            <a href="https://restcountries.com/"
+               target="_blank"
+               rel="noopener noreferrer">
+                REST Countries
+            </a>
+        </p>
+
+    </footer>
+
 
     <script src="script.js"></script>
 
